@@ -1,0 +1,26 @@
+{
+  "name": "cinesoftware",
+  "version": "1.0.0",
+  "description": "proyecto ing de software",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon my_file.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/daniel117622/CinePlus.git"
+  },
+  "author": "daniel, carlos, adrian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daniel117622/CinePlus/issues"
+  },
+  "homepage": "https://github.com/daniel117622/CinePlus#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19",
+    "pug": "^3.0.2"
+  }
+}
