@@ -1,0 +1,31 @@
+html
+  head
+    title= title
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
+  body
+    ul.nav.nav-pills.nav-fill.p-2.lead.text-white(style="background: #000000")
+        li.nav-item
+            a(href="/about")
+                img(src='logo.jpeg' height="40px")
+        li.nav-item
+            a(href="/")
+                span Inicio
+        li.nav-item
+            a(href="/catalogo")
+                span Catalogo
+        li.nav-item
+            a(href="/")
+                span Sucursales
+
+
+    ul.nav.nav-fill.lead.text-gray.p-1(style="background: #ffffff")
+        li.nav-item
+        li.nav-item.mt-3
+            form(action="/search" method="post")
+                .form-group
+                    input.ml-2.mr-2.border(type="text", name="") 
+                    button.mt-0(style="background-color:#181c27; color:white") Buscar pelicula
+
+    block content 
+        
+        

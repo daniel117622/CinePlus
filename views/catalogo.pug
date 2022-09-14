@@ -1,0 +1,13 @@
+extends template/layout.pug 
+
+block content 
+    table.table.table-striped 
+        tr 
+            th Title 
+            th VoteCount 
+            th Popularity
+        each item in apiResults
+            tr 
+                td=item.title 
+                td=item.vote_count
+                td=item.popularity
