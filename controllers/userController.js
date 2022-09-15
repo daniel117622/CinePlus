@@ -17,15 +17,28 @@ exports.catalogo = (req,res,next) =>
 
 exports.login = (req, res, next) =>
 {
+
     res.render('login');
 }
 
 exports.validateLogin = (req,res,next) =>
 {
+
     res.redirect('/');
 }
 
 exports.register = (req,res,next) =>
 {
+    res.render('register');
+}
+
+exports.validateRegister = (req,res,next) =>
+{
+    var usr = req.body.username;
+    var password = req.body.password;
+    axios.post('https://cineplus-9b9ce-default-rtdb.firebaseio.com/users.json',{email:usr , password:password}).then(resp => {
+        console.log(req.body)
+        console.log(resp.status);
+    })
     res.redirect('/');
 }

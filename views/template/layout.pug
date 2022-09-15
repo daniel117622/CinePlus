@@ -20,20 +20,22 @@ html
             tr
 
                 td.ml-3.text-center 
-                    a.text-success(href="/login") Login
+                    a.text-success(href="/login") 🔑 Login
 
                 td.ml-3.text-center 
-                    a.text-success(href="/register") Register
+                    a.text-success(href="/register") 👥 Register
 
 
 
 
     ul.nav.p-2.d-flex.w-100.justify-content-between(style="background: #ffffff; height=170px")
-        li.nav-item
+        li.nav-item.mt-3 
+
         li.nav-item.mt-3
             form(action="/search" method="post")
-                .form-group
-                    input.ml-2.mr-2.border(type="text", name="") 
+                .form-group 
+                    span 🔍
+                    input.ml-2.mr-2.border(type="text", name="")                      
                     button.mt-0(style="background-color:#181c27; color:white") Buscar pelicula
 
     block content 
