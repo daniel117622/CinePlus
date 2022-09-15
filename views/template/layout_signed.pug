@@ -2,28 +2,21 @@ html
   head
     title= title
     link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
-    block custom_css
   body
     div.nav.p-2.d-flex.w-100.justify-content-between(style="background: #000000; height : 75px;")
         table.lead.text-white.w-50
             tr
-                td.ml-3.text-center 
-                    img(src="logo.png", height="66px") 
-                td.ml-3.text-center
-                    a(href="/") Inicio
-                td.ml-3.text-center 
-                    a(href="/catalogo") Catalogo
-                td.ml-3.text-center
-                    a(href="/") Sucursales
-                                     
+                td.ml-3.text-center Inicio
+                td.ml-3.text-center Sucursales
+                td.ml-3.text-center Catalogo
         table.lead.text-white.w-25
             tr
 
                 td.ml-3.text-center 
-                    a.text-success(href="/login") Login
+                    a.text-success(href="/login") Bienvenido, data.user.
 
                 td.ml-3.text-center 
-                    a.text-success(href="/register") Register
+                    a.text-success(href="/register") Cerrar sesion.
 
 
 

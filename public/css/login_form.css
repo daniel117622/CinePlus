@@ -1,0 +1,7 @@
+body{background: rgb(255, 255, 255)}
+.card{
+    border: solid 2px;
+    border-color:rgb(36, 36, 36);
+    height: 320px;
+    box-shadow:  0 0 13px #3d3d3d;
+}.forms-inputs{position: relative}.forms-inputs span{position: absolute;top:-18px;left: 10px;background-color: #fff;padding: 5px 10px;font-size: 15px}.forms-inputs input{height: 50px;border: 2px solid #eee}.forms-inputs input:focus{box-shadow: none;outline: none;border: 2px solid #000}.btn{height: 50px}.success-data{display: flex;flex-direction: column}.bxs-badge-check{font-size: 90px}

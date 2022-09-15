@@ -1,0 +1,26 @@
+extends template/layout.pug 
+
+block custom_css 
+    link(rel='stylesheet',type='text/css',href='css/login_form.css')
+
+block content 
+    .container.mt-5
+        form(action="", method="post") 
+            .row.d-flex.justify-content-center
+                .col-md-6 
+                    .card.px-1.py-5 
+                        .form-data 
+                            .forms-inputs.mb-4
+                                span Email or username 
+                                input.form-control(type="email", name="")
+                            .forms-inputs.mb-4 
+                                span Password 
+                                input.form-control(type="password")
+                            .mb-1.mr-4.ml-4 
+                                button.btn.btn-block Login
+                            .forms-inputs.mb-4.mt-3.ml-2.text-black
+                                a(href="/register") Register new account
+                        
+
+
+            

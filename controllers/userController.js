@@ -14,3 +14,18 @@ exports.catalogo = (req,res,next) =>
     })
     
 }
+
+exports.login = (req, res, next) =>
+{
+    res.render('login');
+}
+
+exports.validateLogin = (req,res,next) =>
+{
+    res.redirect('/');
+}
+
+exports.register = (req,res,next) =>
+{
+    res.redirect('/');
+}
