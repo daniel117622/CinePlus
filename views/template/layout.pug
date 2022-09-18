@@ -17,14 +17,20 @@ html
                     a(href="/") Sucursales
                                      
         table.lead.text-white.w-25
-            tr
+            if !isLoggedIn
+                tr
 
-                td.ml-3.text-center 
-                    a.text-success(href="/login") 🔑 Login
+                    td.ml-3.text-center 
+                        a.text-success(href="/login") 🔑 Login
 
-                td.ml-3.text-center 
-                    a.text-success(href="/register") 👥 Register
+                    td.ml-3.text-center 
+                        a.text-success(href="/register") 👥 Register
+            else 
+                    td.ml-3.text-center 
+                        a.text-success(href="/logout") 🔑 Sign Out
 
+                    td.ml-3.text-center 
+                        a.text-success(href="/register")     
 
 
 
@@ -39,5 +45,5 @@ html
                     button.mt-0(style="background-color:#181c27; color:white") Buscar pelicula
 
     block content 
-        
+    block scripts
         
