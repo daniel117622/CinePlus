@@ -5,7 +5,7 @@ module.exports = class User {
     {
         this.email = email;
         this.password = password;
-        this.username = this.username;
+        this.username = username;
     }
     save()
     {
@@ -17,5 +17,17 @@ module.exports = class User {
         .catch(err => {
             console.log("Error on insertion")
         });
+    }
+
+    static fetchAll()
+    {
+        const db = getDb();
+        return db.collection('users').find().toArray()
+    }
+
+    static findByEmail(mail)
+    {
+        const db = getDb();
+        return db.collection('users').findOne({email:mail});
     }
 }
