@@ -1,13 +1,16 @@
 extends template/layout.pug 
 
 block content 
-    table.table.table-striped 
-        tr 
-            th Title 
-            th VoteCount 
-            th Popularity
-        each item in apiResults
+    if isLoggedIn
+        table.table.table-striped 
             tr 
-                td=item.title 
-                td=item.vote_count
-                td=item.popularity
+                th Title 
+                th VoteCount 
+                th Popularity
+            each item in apiResults
+                tr 
+                    td=item.title 
+                    td=item.vote_count
+                    td=item.popularity
+    else 
+        h3 Not logged in

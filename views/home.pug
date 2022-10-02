@@ -2,15 +2,20 @@
 extends template/layout.pug 
 
 block content 
-    .container.justify-content-between 
-        div(id="fetch_container", onload="loadMovies()")
+    .container.justify-content-between.bg-secondary
+        div#fetch_container            
+            .row.justify-content-center
+                .col-12.ml-5.mt-4
+                    p En cartelera
+                    //- p #{message}
+                    //- p #{!!isLoggedIn}
+                    hr
+            
+            .row.justify-content-center
+                each movie in loadedMovies
+                    .col-auto.m-2.mb-5.text-center
+                        a(href=`/pelicula/${movie.id}`)
+                            img.rounded(src=imgPath+movie.poster_path, alt=movie.title, style={width:150})
+                            //- p #{movie.title}
 
-block scripts 
-    script.
-        function loadMovies()
-        {
-            var container = document.getElementById("fetch-container");
-            container.innerHTML += "Hola";
-            alert(1);
-            console.log("Funcion cargada");
-        }
+

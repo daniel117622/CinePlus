@@ -3,7 +3,6 @@ const User = require('../models/users')
 
 exports.login = (req, res, next) =>
 {
-
     res.render('login');
 }
 
@@ -26,6 +25,7 @@ exports.validateLogin = (req,res,next) =>
             if (data.password == reqPassword)
             {
                 req.session.isLoggedIn = true;
+                req.session.username = data.username;
                 res.redirect('/');
             }
             else

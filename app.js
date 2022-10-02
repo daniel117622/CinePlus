@@ -13,13 +13,16 @@ app.set('views', 'views');
 
 const unsignedRoutes = require('./routes/unsignedUsers');
 const loginRoutes = require('./routes/login');
+const movieRoutes = require('./routes/movie')
 
 app.use(session({secret:'power',resave: false, saveUninitialized: false}));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/',express.static(path.join(__dirname, 'public')));
+app.use('/pelicula',express.static(path.join(__dirname, 'public')));
 
 app.use('/', unsignedRoutes);
 app.use('/', loginRoutes);
+app.use('/pelicula',movieRoutes);
 
 mongoConnect.mongoConnect( (client) => {
     app.listen(3000);
