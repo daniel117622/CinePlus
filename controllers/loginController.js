@@ -64,6 +64,7 @@ exports.validateRegister = (req,res,next) =>
     
     let usr = new User(email,username,password);
     usr.save()
+    console.log({usr})
 
     res.redirect('/');
 }
