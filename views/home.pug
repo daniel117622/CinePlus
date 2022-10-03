@@ -25,7 +25,10 @@ block content
                 each movie in loadedMovies
                     .col-auto.m-2.mb-5.text-center
                         a(href=`/pelicula/${movie.id}`)
-                            img.rounded(src=imgPath+movie.poster_path, alt=movie.title, style="width:150")
-                            //- p #{movie.title}
+                            img.rounded(src=imgPath+movie.poster_path, alt=movie.title, style={width:200})
+                            p(style="white-space:nowrap;width:250px;overflow:hidden;color:white;text-overflow:ellipsis") #{movie.title}
 
 
+
+block scripts
+    script(src="js/test.js") 
