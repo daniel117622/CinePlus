@@ -7,12 +7,14 @@ imgPath = "https://image.tmdb.org/t/p/w1280";
 exports.loadMainPage = async(req,res,next) =>
 {
     var peliculas = await loadMovies();
+    var first_movie_bg_main = peliculas[0];
     // console.log({peliculas})
     res.render('home', { 
         title: 'CinePlus', 
         message: 'Hello there!', 
         isLoggedIn: req.session.isLoggedIn,
         loadedMovies: peliculas,
+        first_movie_bg_main,
         imgPath
     });
 }

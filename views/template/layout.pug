@@ -3,7 +3,9 @@ html
     title= title
     link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
     block custom_css
-  body(style="background: #24292e;")
+    //- background: #24292e
+  body(style="background: #13153D;")
+    //- div.nav.p-2.d-flex.w-100.justify-content-between(style="height : 75px;")
     div.nav.p-2.d-flex.w-100.justify-content-between(style="background: #000000; height : 75px;")
         table.lead.text-white.w-50
             tr
@@ -16,30 +18,40 @@ html
                 td.ml-3.text-center
                     a(href="/") Sucursales
                                      
-        table.lead.text-white.w-25
+        table.lead.w-25
             if !isLoggedIn
                 tr
 
-                    td.ml-3.text-center 
-                        a.text-success(href="/login") 🔑 Login
+                    td.text-center
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#99B65D" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg>
+                        
+                    td.text-center 
+                        a.text-success(href="/login") Iniciar sesión
 
-                    td.ml-3.text-center 
-                        a.text-success(href="/register") 👥 Register
+                    td
+                        //- Línea vertical
+                        div.vr.d-flex.h-100.text-light
+
+                    td.text-center
+                        a.text-success(href="/register") Crear cuenta
             else 
+
                     td.ml-3.text-center 
                         a.text-success(href="/logout") 🔑 Sign Out
 
-  
 
 
-
-    ul.nav.p-2.d-flex.w-100.justify-content-between(style="background: #ffffff; height=170px")
+    ul.nav.p-2.d-flex.w-100.justify-content-between
 
         if !currentUser
-            li.nav-item.mt-3 
+            li.nav-item.mt-3
         else 
             li.nav-item.mt-3(style="color:blue") Bienvenido, #{currentUser}
         
+
 
         li.nav-item.mt-3
             form(action="/search" method="post")
@@ -47,6 +59,7 @@ html
                     span 🔍
                     input.ml-2.mr-2.border(type="text", name="")                      
                     button.mt-0(style="background-color:#181c27; color:white") Buscar pelicula
+
 
     block content 
     block scripts
