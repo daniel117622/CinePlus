@@ -7,6 +7,7 @@ imgPath = "https://image.tmdb.org/t/p/w1280";
 exports.loadMainPage = async(req,res,next) =>
 {
     var peliculas = await loadMovies();
+    console.log(peliculas)
     // console.log({peliculas})
     res.render('home', { 
         title: 'CinePlus', 
@@ -30,8 +31,6 @@ exports.catalogo = (req,res,next) =>
 
 const loadMovies = async() => {
     var peliculas;
-    
-    console.log('Funcion cargada');
     peliculas = await axios.get(q).then(resp => {
         return resp.data.results;
     }).catch( err => {
