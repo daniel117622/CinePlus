@@ -1,4 +1,22 @@
 extends template/layout.pug 
 
+
+
 block content 
-    h2(style="color:white") Movie desc
+    .container.d-flex.mt-5(style="color:white")
+        .container(style="text-align:center")
+            img(src="https://image.tmdb.org/t/p/w500"+ moviePoster alt="Poster" width="250px")
+            p.mt-4 
+                span.fa.fa-star.checked &nbsp
+                span.fa.fa-star.checked &nbsp
+                span.fa.fa-star.checked &nbsp
+                span.fa.fa-star.checked &nbsp
+                span.fa.fa-star.checked &nbsp
+            p.mt-3
+                button.btn.btn-warning(style="width:280px;height:55px;font-weight:bold") Reservar
+        .container
+            h3 #{movieTitle}
+            p <span style="color:#61c8fa"> Sinopsis  </span><br>#{movieDesc}
+            p <span style="color:#61c8fa"> Reseñas y ratings </span><br>
+            li Popularidad : #{popularity}
+            li Votos : #{vote_count}
