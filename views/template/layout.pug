@@ -40,7 +40,12 @@ html
                     td.text-center
                         a.text-success(href="/register") Crear cuenta
             else 
-
+                if isAdmin
+                    td.ml-3.text-center 
+                        a.text-success(href="/admin")  Admin Panel      
+                    td.ml-3.text-center 
+                        a.text-success(href="/logout") 🔑 Sign Out
+                else
                     td.ml-3.text-center 
                         a.text-success(href="/logout") 🔑 Sign Out
 

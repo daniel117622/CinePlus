@@ -1,0 +1,24 @@
+extends template/layout.pug
+
+block content
+    if !isAdmin 
+        .container.mr-0.ml-0.justify-content-between.d-flex.flex-row.h-100 
+            .container.mr-0.ml-0.w-25.border-right.h100(style="color:white")
+                p.h4.border-bottom Administrar
+                p 
+                    a(href="boletos") Boletos
+                p 
+                    a(href="usuarios") Usuarios
+                p 
+                    a(href="funciones") Funciones
+            .container.mr-0.ml-0
+                h2(style="color:white") Dashboard
+                #fetch-content
+    else 
+        .container 
+            .h3(style="color:red") Forbidden
+
+block scripts 
+    if !isAdmin 
+        script(src="js/dashboard.js") 
+        

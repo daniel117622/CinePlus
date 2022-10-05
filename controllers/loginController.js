@@ -1,5 +1,8 @@
 const { urlencoded } = require('body-parser');
 const User = require('../models/users')
+const getDb = require('../database/database').getDb;
+
+const db = getDb();
 
 exports.login = (req, res, next) =>
 {
@@ -26,6 +29,7 @@ exports.validateLogin = (req,res,next) =>
             {
                 req.session.isLoggedIn = true;
                 req.session.username = data.username;
+                if (data.admin) {req.session.isAdmin = true}                
                 res.redirect('/');
             }
             else
@@ -56,15 +60,73 @@ exports.logout = (req,res,next) =>
 
 exports.validateRegister = (req,res,next) =>
 {
-    var username = req.body.username;
-    var email = req.body.email;
-    var password = req.body.password;
+    var _username = req.body.username;
+    var _email = req.body.email;
+    var _password = req.body.password;
 
-    console.log(username)
+
+    if (!isEmailValid(_email)) // Return if invalid email
+    {
+        res.redirect('/');
+        return;
+    }
+
+    User.findByEmail(_email)
+    .then( (data) => {
+        console.log(data);
+        if (!(data === null))
+        {
+            console.log('Attempted to create an existing user')
+            res.redirect('/login');
+            return;
+        }
+        if (_username.length <= 5)
+        {
+            console.log('Too short username')
+            res.redirect('/')
+            return;
+        }
     
-    let usr = new User(email,username,password);
-    usr.save()
-    console.log({usr})
+        if (_password.length <= 5)
+        {
+            console.log('Too short username')
+            res.redirect('/')
+            return;
+        }
+        
+        let usr = new User(_email,_username,_password);
+        usr.save()
+        req.session.isLoggedIn = true;
+    
+        res.redirect('/');
+    })
+    .catch( (err) => {console.log(err)});
+    
 
-    res.redirect('/');
+}
+
+
+var emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
+
+function isEmailValid(email) {
+    if (!email)
+        return false;
+
+    if(email.length>254)
+        return false;
+
+    var valid = emailRegex.test(email);
+    if(!valid)
+        return false;
+
+    // Further checking of some things regex can't handle
+    var parts = email.split("@");
+    if(parts[0].length>64)
+        return false;
+
+    var domainParts = parts[1].split(".");
+    if(domainParts.some(function(part) { return part.length>63; }))
+        return false;
+
+    return true;
 }

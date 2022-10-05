@@ -6,13 +6,14 @@ module.exports = class User {
         this.email = email;
         this.password = password;
         this.username = username;
+        this.admin = false;
     }
     save()
     {
         const db = getDb();
         db.collection('users').insertOne(this)
         .then(res => {
-            console.log(res)
+            
         })
         .catch(err => {
             console.log("Error on insertion")
