@@ -7,5 +7,6 @@ router.get('/',adminController.adminDashboard);
 router.get('/boletos',adminController.adminBoletos);
 router.get('/usuarios',adminController.adminUsuarios);
 router.get('/funciones',adminController.adminFunciones);
+router.post('/funciones',adminController.adminPushFunction);
 
 module.exports = router;

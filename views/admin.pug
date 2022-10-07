@@ -57,24 +57,25 @@ block content
                     .container(style="text-align:center")
                         h4 Anadir funcion
                         form.form-control.text-dark(method="POST")
-                            .card#funcion(style="border:solid 1px")
+                            #funcion(style="border-bottom:solid 1px")
                                 .h4 Datos de la funcion
                                 .form-group.row.mt-4
                                     label.col-sm-4(for="") Movie ID:  
-                                    input(type="text")
+                                    input(type="text" name="movie_id" pattern="[0-9]+")
                                 .form-group.row
                                     label.col-sm-4 ID de cine
-                                    select(name="")
+                                    select(name="cine_id")
                                         option 1
                                         option 2
                                         option 3 
                                 .form-group.row
                                     label.col-sm-4(for="") Hora  
-                                    input(type="date", name="")
+                                    input(type="datetime-local", name="datetime")
                             #new-cards-container 
                             
                             .form-group
-                                button.btn-block.btn Add Function      
+                                button.btn-block.btn#add-func Anadir  
+                                button.btn-block.btn.btn-warning Submit   
                 else 
                     h2(style="color:white") Dashboard
 
