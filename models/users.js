@@ -1,12 +1,12 @@
 const getDb = require('../database/database').getDb;
 
 module.exports = class User {
-    constructor(email,username,password)
+    constructor(email,username,password,admin=false)
     {
         this.email = email;
         this.password = password;
         this.username = username;
-        this.admin = false;
+        this.admin = admin;
     }
     save()
     {
