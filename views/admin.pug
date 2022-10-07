@@ -11,9 +11,73 @@ block content
                     a(href="usuarios") Usuarios
                 p 
                     a(href="funciones") Funciones
-            .container.mr-0.ml-0
-                h2(style="color:white") Dashboard
-                #fetch-content
+            .container.mr-0.ml-0(style="color:white")
+                if table == "boletos"
+                    h2(style="color:white") Boletos
+                else if table == "usuarios"
+                    h2(style="color:white;text-align:center") Usuarios
+                    table.table.table-bordered.m-4(style="color:white")
+                        tr
+                            td Email 
+                            td Username
+                            td Password
+                            td Admin
+                            td Actions
+                        tr
+                        each val,key in data 
+                            tr(style="text-align:center")
+                                td #{val.email}
+                                td #{val.username}
+                                td #{val.password} 
+                                td #{val.admin}
+                                td.text-center 
+                                    button.btn.btn-success Edit
+                        
+                    .container(style="text-align:center")
+                        h4 Add new user
+                        form.form-control.text-dark(method="POST")
+                            .form-group.row.mt-4
+                                label.col-sm-4(for="") Register email:  
+                                input(type="text")
+                            .form-group.row
+                                label.col-sm-4(for="") Username:  
+                                input(type="text")
+                            .form-group.row
+                                label.col-sm-4(for="") Password:  
+                                input(type="text")   
+                            .form-group.row
+                                label.col-sm-4(for="") Admin Status 
+                                select
+                                    option True 
+                                    option False      
+                            .form-group-row 
+                                button.btn-block.btn Load user                   
+                else if table == "funciones"
+                    h2(style="color:white") Funciones
+                    .container(style="text-align:center")
+                        h4 Anadir funcion
+                        form.form-control.text-dark(method="POST")
+                            .card#funcion(style="border:solid 1px")
+                                .h4 Datos de la funcion
+                                .form-group.row.mt-4
+                                    label.col-sm-4(for="") Movie ID:  
+                                    input(type="text")
+                                .form-group.row
+                                    label.col-sm-4 ID de cine
+                                    select(name="")
+                                        option 1
+                                        option 2
+                                        option 3 
+                                .form-group.row
+                                    label.col-sm-4(for="") Hora  
+                                    input(type="date", name="")
+                            #new-cards-container 
+                            
+                            .form-group
+                                button.btn-block.btn Add Function      
+                else 
+                    h2(style="color:white") Dashboard
+
     else 
         .container 
             .h3(style="color:red") Forbidden

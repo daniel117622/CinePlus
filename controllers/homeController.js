@@ -19,7 +19,6 @@ exports.loadMainPage = async(req,res,next) =>
         loadedMovies: peliculas,
         first_movie_bg_main,
         imgPath
-
     });
 }
 exports.catalogo = (req,res,next) =>
