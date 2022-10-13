@@ -1,6 +1,8 @@
 const axios = require('axios');
 const User = require('../models/users')
 
+const { loadMovies } = require('../public/js/functions');
+
 q = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=2";
 imgPath = "https://image.tmdb.org/t/p/w1280";
 
@@ -33,16 +35,7 @@ exports.catalogo = (req,res,next) =>
     
 }
 
-const loadMovies = async() => {
-    var peliculas;
-    peliculas = await axios.get(q).then(resp => {
-        return resp.data.results;
-    }).catch( err => {
-        console.log(err);
-    })
-    // console.log({peliculas});
-    return peliculas;
-}
+
 
 
 

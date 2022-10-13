@@ -1,9 +1,10 @@
 const { urlencoded } = require('body-parser');
-const User = require('../models/users')
 const getDb = require('../database/database').getDb;
 
+const User = require('../models/users')
+
 const db = getDb();
-const { isEmailValid } = require('./functions');
+const { isEmailValid } = require('../public/js/functions');
 
 exports.login = (req, res, next) =>
 {
