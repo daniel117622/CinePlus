@@ -1,8 +1,10 @@
-const User = require('../models/users')
-const getDb = require('../database/database').getDb;
-const { isEmailValid } = require('./functions');
 const axios = require('axios');
+
 const MovieShow = require('../models/movieShows');
+const User = require('../models/users')
+
+const { getDb } = require('../database/database');
+const { isEmailValid } = require('../public/js/functions');
 
 
 exports.adminDashboard = (req,res,next) =>
@@ -14,7 +16,7 @@ exports.adminDashboard = (req,res,next) =>
     ms.addShow(2,new Date('2056-12-12T16:00:00.000Z'),"Sala 1",[{num_asiento:"A1",ocupado:false,id_usuario:1}]);
     ms.save();
     */
-    res.render('admin',{isAdmin : req.session.isAdmin});
+    res.render('admin',{title: "Dashboard", isAdmin : req.session.isAdmin});
 }
 exports.adminPushFunction = (req,res,next) =>
 {
@@ -39,69 +41,81 @@ exports.adminPushFunction = (req,res,next) =>
 exports.adminBoletos = (req,res,next) =>
 {
     console.log('Boletos');
-    res.render('admin',{isAdmin : req.session.isAdmin,table:"boletos"});
+    res.render('admin',{title: "Boletos", isAdmin : req.session.isAdmin,table:"boletos"});
 }
 exports.adminUsuarios = (req,res,next) =>
 {
+    // console.log(req.body);
     console.log('Loaded: Usuarios page');
+
     const db = getDb();
     db.collection("users").find({}).toArray( (err,db_res) => {
         if (err) { res.render('/') }
         let users = db_res;
-        console.log(users)
-        res.render('admin',{isAdmin : req.session.isAdmin,table:"usuarios", data : users});
+        
+        res.render('admin',{title: "Usuarios", isAdmin : req.session.isAdmin,table:"usuarios", data : users});
     })
     
 }
-exports.adminSaveUsuario = (req,res,next) =>
+exports.saveUsuario = (req, res, next) => 
 {
-    console.log("Guardando usuario...");
-    
-    let _username = req.body.username;
-    let _email = req.body.email;
-    let _password = req.body.password;
-    let _admin = req.body.admin_status;
-    console.log(_username, _email, _password, _admin)
-    if (!isEmailValid(_email))
-    {
-        // console.log("invalid email");
-        // res.sendFile('/admin', {error:"Email inválido"})
-        // res.jsonp({error:"Email inválido"});
-        res.redirect('/admin/usuarios');
-        throw new Error("Email inválido");
+	console.log('Guardando usuario...');
+
+	let _username = req.body.username;
+	let _email = req.body.email;
+	let _password = req.body.password;
+	let _admin = req.body.admin_status;
+	console.log(_username, _email, _password, _admin);
+	if (!isEmailValid(_email)) {
+        // PASAR ERROR A VIEW
+		// console.log("invalid email");
+		res.redirect('/admin/usuarios');
+		throw new Error('Email inválido');
+	}
+
+	User.findByEmail(_email)
+		.then((data) => {
+			if (data != null) {
+				throw 'Attempted to create an existing user';
+			}
+			if (_username.length <= 5) {
+				throw 'Username is too short';
+			}
+			if (_password.length <= 5) {
+				throw 'Password is too short';
+			}
+
+			// Guardar usuario
+			let newUser = new User(_email, _username, _password, _admin);
+			newUser.save();
+
+			res.redirect('/admin/usuarios');
+		})
+		.catch((error) => {
+			// PASAR ERROR A VIEW
+			// PASAR ERROR A VIEW
+			// PASAR ERROR A VIEW
+            next(new Error(error));
+			res.redirect('/admin/usuarios');
+		});
+};
+
+exports.deleteUsuario = (req,res,next) => 
+{
+    // console.log("llegaste a controller!");
+    if(!req.body){
+        return;
     }
     
-    User.findByEmail(_email)
-    .then( (data) => {
-        
-        if (data != null)
-        {
-            throw "Attempted to create an existing user";
-        }
-        if (_username.length <= 5)
-        {
-            throw "Username is too short";
-        }
-        if (_password.length <= 5)
-        {
-            throw "Password is too short"
-        }
-
-        // Guardar usuario
-        let newUser = new User(_email, _username, _password, _admin);
-        newUser.save();
-
-        res.redirect('/admin/usuarios');
-    })
-    .catch( error => {
-        next(new Error(error));
-        // Pasar error a view
-        res.redirect('/admin/usuarios');
-    })
-
+    var id = req.params.id;
+    // console.log({});
+    User.deleteById(id);
+    res.send({id});
 }
+
 exports.adminFunciones = (req,res,next) =>
 {
     console.log('Funciones');
-    res.render('admin',{isAdmin : req.session.isAdmin,table:"funciones"});
+    res.render('admin',{title: "Funciones", isAdmin : req.session.isAdmin,table:"funciones"});
 }
+

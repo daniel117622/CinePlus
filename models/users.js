@@ -8,6 +8,7 @@ module.exports = class User {
         this.username = username;
         this.admin = admin;
     }
+    
     save()
     {
         const db = getDb();
@@ -18,6 +19,19 @@ module.exports = class User {
         .catch(err => {
             console.log("Error on insertion")
         });
+    }
+    
+    static deleteById(Id)
+    {
+        const db = getDb();
+        try {
+            // console.log("Borrando...");
+            db.collection('users').deleteOne({id: Id});
+            
+        } catch (error) {
+            console.log("Error...");
+            console.log(error)
+        }
     }
 
     static fetchAll()

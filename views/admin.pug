@@ -16,7 +16,7 @@ block content
                     h2(style="color:white") Boletos
                 else if table == "usuarios"
                     h2(style="color:white;text-align:center") Usuarios
-                    table.table.table-bordered.m-4(style="color:white")
+                    table.table-users.table.table-bordered.m-4(style="color:white")
                         tr
                             td Email 
                             td Username
@@ -31,12 +31,16 @@ block content
                                 td #{val.password} 
                                 td #{val.admin}
                                 td.text-center
-                                    button.btn.btn-success.m-0.mr-3(name="btn-edit") Edit
-                                    button.btn.btn-danger.m-0(name="btn-delete") Delete
-                    //- Nuevo usuario form
-                    .container(style="text-align:right")
-                        h4 Add new user
-                        form.form-control.text-dark(method="POST")
+                                    button.btn.btn-success.m-0.mr-3(name="btn-edit" value=val._id) Edit
+                                    button.btn.btn-danger.m-0(name="btn-delete" value=val._id) Delete
+                    button#btn-add-admin-user.btn.btn-secondary.ml-4 Add new user
+                    //- Should appear when the button is clicked
+                    //- Nuevo usuario admin form
+                    .container.m-4#container-add-admin(style="text-align:right; display:none")
+                        form.form-control.text-secondary(method="POST")
+                            div.d-flex.justify-content-end
+                                p#add-admin-close.text-center(style="cursor:pointer;") Close 
+                                
                             .form-group.row.mt-4
                                 label.col-sm-4(for="") Register email:  
                                 input(type="email", name="email")
@@ -52,14 +56,14 @@ block content
                                     option(value="true") True 
                                     option(value="false") False      
                             .form-group-row
-                                p.error.text-danger.text-center(style=`${error?'display:block':'display:none'}`) Error
+                                p.error.text-danger.text-center(style=`${error?'display:block':'display:none'}`) #{error}
                             .form-group-row 
                                 button.btn-block.btn(type='submit') Load user
                                    
                 else if table == "funciones"
                     h2(style="color:white") Funciones
                     .container(style="text-align:center")
-                        h4 Anadir funcion
+                        h4 Añadir función
                         form.form-control.text-dark(method="POST")
                             #funcion(style="border-bottom:solid 1px")
                                 .h4 Datos de la funcion
@@ -78,7 +82,7 @@ block content
                             #new-cards-container 
                             
                             .form-group
-                                button.btn-block.btn#add-func Anadir  
+                                button.btn-block.btn#add-func Añadir  
                                 button.btn-block.btn.btn-warning Submit   
                 else 
                     h2(style="color:white") Dashboard
