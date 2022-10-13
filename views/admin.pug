@@ -25,13 +25,13 @@ block content
                             td Actions
                         tr
                         each val,key in data 
-                            tr(style="text-align:center")
+                            tr(style="text-align:center" id=val.email)
                                 td #{val.email}
                                 td #{val.username}
                                 td #{val.password} 
                                 td #{val.admin}
-                                td.text-center
-                                    button.btn.btn-success.m-0.mr-3(name="btn-edit" value=val._id) Edit
+                                td.text-center                             
+                                    button.btn.btn-success.m-0.mr-3(name="btn-edit" value=val.email) Edit
                                     button.btn.btn-danger.m-0(name="btn-delete" value=val._id) Delete
                     button#btn-add-admin-user.btn.btn-secondary.ml-4 Add new user
                     //- Should appear when the button is clicked

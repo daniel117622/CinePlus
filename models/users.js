@@ -1,3 +1,5 @@
+const { ObjectID } = require('bson');
+
 const getDb = require('../database/database').getDb;
 
 module.exports = class User {
@@ -24,14 +26,8 @@ module.exports = class User {
     static deleteById(Id)
     {
         const db = getDb();
-        try {
-            // console.log("Borrando...");
-            db.collection('users').deleteOne({id: Id});
-            
-        } catch (error) {
-            console.log("Error...");
-            console.log(error)
-        }
+        db.collection('users').deleteOne({_id: ObjectID(Id)}).then((r) => { /* console.log(r) */}).catch((e) => {console.log(e)});
+
     }
 
     static fetchAll()

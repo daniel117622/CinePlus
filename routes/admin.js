@@ -13,4 +13,5 @@ router.delete('/usuarios/:id',adminController.deleteUsuario);
 router.get('/funciones',adminController.adminFunciones);
 router.post('/funciones',adminController.adminPushFunction);
 
+
 module.exports = router;
