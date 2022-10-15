@@ -30,8 +30,7 @@ block content
                                 td #{val.username}
                                 td #{val.password} 
                                 td #{val.admin}
-                                td.text-center                             
-                                    button.btn.btn-success.m-0.mr-3(name="btn-edit" value=val.email) Edit
+                                td.text-center
                                     button.btn.btn-danger.m-0(name="btn-delete" value=val._id) Delete
                     button#btn-add-admin-user.btn.btn-secondary.ml-4 Add new user
                     //- Should appear when the button is clicked
@@ -39,7 +38,7 @@ block content
                     .container.m-4#container-add-admin(style="text-align:right; display:none")
                         form.form-control.text-secondary(method="POST")
                             div.d-flex.justify-content-end
-                                p#add-admin-close.text-center(style="cursor:pointer;") Close 
+                                button#add-admin-close-btn.btn.text-center(style="cursor:pointer;") Close
                                 
                             .form-group.row.mt-4
                                 label.col-sm-4(for="") Register email:  

@@ -102,15 +102,13 @@ exports.saveUsuario = (req, res, next) =>
 
 exports.deleteUsuario = (req,res,next) => 
 {
-    // console.log("llegaste a controller!");
     if(!req.body){
         return;
     }
     
     var id = req.params.id;
-    // console.log({});
-    User.deleteById(id);
-    res.send({id});
+    User.deleteById(id)
+    res.redirect('/admin/usuarios');
 }
 
 exports.adminFunciones = (req,res,next) =>
