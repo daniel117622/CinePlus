@@ -15,11 +15,13 @@ document.getElementsByName('btn-delete')?.forEach((button) => {
 	});
 });
 
-document.getElementById('btn-add-admin-user')?.addEventListener('click', function() {
+document.getElementById('btn-add-admin-user')?.addEventListener('click', function(e) {
+	e.preventDefault();
     document.getElementById('container-add-admin').style.display="block";
 })
 
-document.getElementById('add-admin-close-btn')?.addEventListener('click', function() {
+document.getElementById('add-admin-close-btn')?.addEventListener('click', function(e) {
+	e.preventDefault();
     document.getElementById('container-add-admin').style.display="none";
 })
 
