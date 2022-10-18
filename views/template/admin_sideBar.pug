@@ -1,0 +1,27 @@
+extends layout.pug
+
+block content
+    if !isAdmin 
+        .container.mr-0.ml-0.justify-content-between.d-flex.flex-row.h-100 
+            .container.mr-0.ml-0.w-25.border-right.h100(style="color:white")
+                p.h4.border-bottom Administrar
+                p 
+                    a(href="boletos") Boletos
+                p 
+                    a(href="usuarios") Usuarios
+                p 
+                    a(href="funciones") Funciones
+                p 
+                    a(href="cines") Cines
+
+            .container.mr-0.ml-0(style="color:white")
+                block admin_content
+
+    else 
+        .container 
+            .h3(style="color:red") Forbidden
+
+block scripts 
+    if !isAdmin 
+        script(src="js/dashboard.js") 
+        

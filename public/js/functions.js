@@ -1,8 +1,8 @@
 const axios = require('axios');
+const { getDb } = require('../../database/database');
 
-const loadMovies = async () => {
-	var peliculas;
-	peliculas = await axios
+const loadMovies = () => {
+	return axios
 		.get(q)
 		.then((resp) => {
 			return resp.data.results;
@@ -10,8 +10,23 @@ const loadMovies = async () => {
 		.catch((err) => {
 			console.log(err);
 		});
-	// console.log({peliculas});
-	return peliculas;
+};
+
+const getUsers = async () => {
+	const db = getDb();
+	const users = await db.collection('users').find().toArray();
+
+	if (users.length < 0) {
+		return {
+			users: users,
+			error: 'No hay usuarios',
+		};
+	}
+		
+	return {
+		users: users,
+		error: null
+	}
 };
 
 const isEmailValid = (email) => {
@@ -40,5 +55,6 @@ const isEmailValid = (email) => {
 	return true;
 };
 
-exports.isEmailValid = isEmailValid;
 exports.loadMovies = loadMovies;
+exports.getUsers = getUsers;
+exports.isEmailValid = isEmailValid;

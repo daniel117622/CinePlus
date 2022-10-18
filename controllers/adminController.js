@@ -1,10 +1,11 @@
 const axios = require('axios');
 
-const MovieShow = require('../models/movieShows');
-const User = require('../models/users')
+const MovieShow = require('../models/MovieShows');
+const User = require('../models/Users')
 
 const { getDb } = require('../database/database');
 const { isEmailValid } = require('../public/js/functions');
+const { getUsers } = require('../public/js/functions');
 
 
 exports.adminDashboard = (req,res,next) =>
@@ -43,19 +44,12 @@ exports.adminBoletos = (req,res,next) =>
     console.log('Boletos');
     res.render('admin',{title: "Boletos", isAdmin : req.session.isAdmin,table:"boletos"});
 }
-exports.adminUsuarios = (req,res,next) =>
+exports.adminUsuarios = async(req,res,next) =>
 {
-    // console.log(req.body);
-    console.log('Loaded: Usuarios page');
-
-    const db = getDb();
-    db.collection("users").find({}).toArray( (err,db_res) => {
-        if (err) { res.render('/') }
-        let users = db_res;
-        
-        res.render('admin',{title: "Usuarios", isAdmin : req.session.isAdmin,table:"usuarios", data : users});
-    })
+    // console.log('Loaded: Usuarios page');
+    const { users, error} = await getUsers();
     
+    res.render('admin',{title: "Usuarios", isAdmin : req.session.isAdmin,table:"usuarios", data : users});
 }
 exports.saveUsuario = (req, res, next) => 
 {
@@ -65,12 +59,12 @@ exports.saveUsuario = (req, res, next) =>
 	let _email = req.body.email;
 	let _password = req.body.password;
 	let _admin = req.body.admin_status;
-	console.log(_username, _email, _password, _admin);
+    
 	if (!isEmailValid(_email)) {
         // PASAR ERROR A VIEW
 		// console.log("invalid email");
-		res.redirect('/admin/usuarios');
-		throw new Error('Email inválido');
+		return res.send({error: 'Email inválido'});
+		// throw new Error('Email inválido');
 	}
 
 	User.findByEmail(_email)
@@ -100,20 +94,36 @@ exports.saveUsuario = (req, res, next) =>
 		});
 };
 
-exports.deleteUsuario = (req,res,next) => 
-{
-    if(!req.body){
-        return;
-    }
-    
-    var id = req.params.id;
-    User.deleteById(id)
-    res.redirect('/admin/usuarios');
-}
+exports.deleteUsuario = async (req, res) => {
+	if (!req.params) {
+		return;
+	}
+	const { users, error } = await getUsers();
+	const result = await User.deleteById(req.params.id);
+
+	if (result.deletedCount === 1) {
+		console.log('Successfully deleted one document.');
+	} else {
+		console.log('No documents matched the query. Deleted 0 documents.');
+	}
+
+	res.render('admin', {
+		title: 'Usuarios',
+		isAdmin: req.session.isAdmin,
+		table: 'usuarios',
+		data: users,
+	});
+};
 
 exports.adminFunciones = (req,res,next) =>
 {
     console.log('Funciones');
     res.render('admin',{title: "Funciones", isAdmin : req.session.isAdmin,table:"funciones"});
+}
+
+exports.adminCines = (req,res,next) =>
+{
+    console.log('Cines');
+    res.render('admin',{title: "Cines", isAdmin : req.session.isAdmin,table:"cines"});
 }
 

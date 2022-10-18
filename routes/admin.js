@@ -8,10 +8,11 @@ router.get('/boletos',adminController.adminBoletos);
 
 router.get('/usuarios',adminController.adminUsuarios);
 router.post('/usuarios',adminController.saveUsuario);
-router.delete('/usuarios/:id',adminController.deleteUsuario);
+router.delete('/usuarios/delete/:id',adminController.deleteUsuario);
 
 router.get('/funciones',adminController.adminFunciones);
 router.post('/funciones',adminController.adminPushFunction);
 
+router.get('/cines',adminController.adminCines);
 
 module.exports = router;

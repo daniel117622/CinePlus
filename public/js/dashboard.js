@@ -6,20 +6,36 @@ document.getElementById('add-func')?.addEventListener('click', function (e) {
 	card_container.innerHTML += new_card;
 });
 
-document.getElementsByName('btn-delete')?.forEach((button) => {
-	button.addEventListener('click', function() {
-		fetch(`/admin/usuarios/${button.value}`, {
+// document.getElementsByName('btn-delete')?.forEach((button) => {
+// 	button.addEventListener('click', function(e) {
+// 		e.preventDefault();
+// 		fetch(`/admin/usuarios/${button.value}`, {
+// 			method: 'DELETE',
+// 			body: {},
+// 		});
+// 	});
+// });
+
+document.querySelectorAll('[data-delete]')?.forEach((button) => {
+	button.addEventListener('click', function(e) {
+		e.preventDefault();
+		console.log(e.target.dataset.delete);
+
+		fetch(`/admin/usuarios/delete/${e.target.dataset.delete}`, {
 			method: 'DELETE',
-			body: {},
-		});
-	});
+			// body: {},
+		})
+
+	})
 });
 
-document.getElementById('btn-add-admin-user')?.addEventListener('click', function() {
-    document.getElementById('container-add-admin').style.display="block";
+document.getElementById('btn-add-admin-user')?.addEventListener('click', function(e) {
+	e.preventDefault();
+	document.getElementById('container-add-admin').style.display="block";
 })
 
-document.getElementById('add-admin-close-btn')?.addEventListener('click', function() {
+document.getElementById('add-admin-close-btn')?.addEventListener('click', function(e) {
+	e.preventDefault();
     document.getElementById('container-add-admin').style.display="none";
 })
 
