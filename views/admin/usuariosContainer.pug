@@ -1,0 +1,48 @@
+//- extends ../admin.pug
+
+//- block table_usuarios
+
+h2(style="color:white;text-align:center") Usuarios
+table.table-users.table.table-bordered.m-4(style="color:white")
+    tr
+        td Email 
+        td Username
+        td Password
+        td Admin
+        td Actions
+    tr
+    each val,key in data 
+        tr(style="text-align:center" id=val.email)
+            td #{val.email}
+            td #{val.username}
+            td #{val.password} 
+            td #{val.admin}
+            td.text-center
+                button.btn.btn-danger.m-0(name="btn-delete" data-delete=val._id) Delete
+button#btn-add-admin-user.btn.btn-secondary.ml-4 Add new user
+//- Appears when the button is clicked
+//- Nuevo usuario admin form
+.container.m-4#container-add-admin(style="text-align:right; display:none")
+    form.form-control.text-secondary(method="POST")
+        div.d-flex.justify-content-end
+            button#add-admin-close-btn.btn.text-center(style="cursor:pointer;") Close
+            
+        .form-group.row.mt-4
+            label.col-sm-4(for="") Register email:  
+            input(type="email", name="email")
+        .form-group.row
+            label.col-sm-4(for="") Username:  
+            input(type="text", name="username")
+        .form-group.row
+            label.col-sm-4(for="") Password:  
+            input(type="password", name="password")
+        .form-group.row
+            label.col-sm-4(for="") Admin Status 
+            select(name="admin_status")
+                option(value="true") True 
+                option(value="false") False      
+        .form-group-row
+            p.error.text-danger.text-center(style=`${error?'display:block':'display:none'}`) #{error}
+        .form-group-row 
+            button.btn-block.btn(type='submit') Load user
+        
