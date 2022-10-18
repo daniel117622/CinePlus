@@ -19,24 +19,24 @@ module.exports = class User {
 				console.log('Error on insertion');
 			});
 	}
-
-	static deleteById(Id) {
-		const db = getDb();
-		db.collection('users')
-			.deleteOne({ _id: ObjectID(Id) })
-			.then((res) => {})
-			.catch((e) => {
-				console.log(e);
-			});
-	}
-
+	
 	static fetchAll() {
 		const db = getDb();
 		return db.collection('users').find().toArray();
 	}
-
+	
 	static findByEmail(mail) {
 		const db = getDb();
 		return db.collection('users').findOne({ email: mail });
+	}
+	
+	static findById(Id) {
+		const db = getDb();
+		return db.collection('users').findOne({ _id: ObjectID(Id) });
+	}
+
+	static deleteById(Id) {
+		const db = getDb();
+		return db.collection('users').deleteOne({ _id: ObjectID(Id) })
 	}
 };
