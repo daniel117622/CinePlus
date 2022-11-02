@@ -10,11 +10,11 @@ const getDb = require('../database/database').getDb;
 
 module.exports = class Cine
 {
-    constructor(nombre, direccion, n_salas)
+    constructor(nombre, direccion, num_salas)
     {
         this.nombre = nombre;
         this.direccion = direccion;
-        this.salas = n_salas;
+        this.num_salas = num_salas;
     }
 
     save() 
@@ -22,7 +22,9 @@ module.exports = class Cine
         const db = getDb();
         db.collection('cines')
             .insertOne(this)
-            .then((res) => {})
+            .then((res) => {
+                console.log('Insertion succesful');
+            })
             .catch((err) => {
                 console.log('Error on insertion');
             });

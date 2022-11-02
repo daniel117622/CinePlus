@@ -40,6 +40,5 @@ module.exports = class User {
 		const algo = await db.collection('users').deleteOne({ _id: ObjectID(Id) });
 
 		return algo
-		
 	}
 };

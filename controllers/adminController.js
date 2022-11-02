@@ -2,6 +2,7 @@ const axios = require('axios');
 
 const MovieShow = require('../models/MovieShows');
 const User = require('../models/Users')
+const Cine = require('../models/Cines');
 
 const { getDb } = require('../database/database');
 const { isEmailValid } = require('../public/js/functions');
@@ -91,24 +92,19 @@ exports.saveUsuario = (req, res, next) =>
 
 exports.deleteUsuario = async (req, res) => {
 	if (!req.params) {
-		return;
+        res.redirect('/');
 	}
-	const { users, error } = await getUsers();
-	const result = await User.deleteById(req.params.id);
+	// const { users, error } = await getUsers();
+	User.deleteById(req.params.id)
+     .then(res => console.log(res))
+     .catch(err => console.log(err));
 
-	if (result.deletedCount === 1) {
-		console.log('Successfully deleted one document.');
-	} else {
-		console.log('No documents matched the query. Deleted 0 documents.');
-	}
-
-	// res.render('admin', {
-	// 	title: 'Usuarios',
-	// 	isAdmin: req.session.isAdmin,
-	// 	table: 'usuarios',
-	// 	data: users,
-	// });
-    res.redirect('admin');
+	// if (result.deletedCount === 1) {
+	// 	console.log('Successfully deleted one document.');
+	// } else {
+	// 	console.log('No documents matched the query. Deleted 0 documents.');
+	// }
+    res.redirect('/');
 };
 
 exports.adminFunciones = (req,res,next) =>
@@ -121,5 +117,25 @@ exports.adminCines = (req,res,next) =>
 {
     console.log('Cines');
     res.render('admin',{title: "Cines", isAdmin : req.session.isAdmin,table:"cines"});
+    let newCine = new Cine("Cine 2", "Direcc 2", 30);
+    newCine.save();
+
+}
+
+exports.addNewCine = (req,res,next) => 
+{
+    if (!req.params) {
+        res.redirect('/');
+	}
+    
+    const _id = req.params.id
+    const _nombre = req.params.id
+    const _direccion = req.params.id
+    const _num_salas = req.params.id
+
+
+
+    res.redirect('/')    ;
+    
 }
 

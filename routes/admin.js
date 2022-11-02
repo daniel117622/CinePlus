@@ -14,5 +14,6 @@ router.get('/funciones',adminController.adminFunciones);
 router.post('/funciones',adminController.adminPushFunction);
 
 router.get('/cines',adminController.adminCines);
+router.post('/cines',adminController.addNewCine);
 
 module.exports = router;

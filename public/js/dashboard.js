@@ -25,6 +25,8 @@ document.querySelectorAll('[data-delete]')?.forEach((button) => {
 			method: 'DELETE',
 			// body: {},
 		})
+		.then(() => location.reload())
+		
 
 	})
 });
