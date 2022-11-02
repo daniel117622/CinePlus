@@ -62,9 +62,7 @@ exports.saveUsuario = (req, res, next) =>
     
 	if (!isEmailValid(_email)) {
         // PASAR ERROR A VIEW
-		// console.log("invalid email");
 		return res.send({error: 'Email inválido'});
-		// throw new Error('Email inválido');
 	}
 
 	User.findByEmail(_email)
@@ -86,9 +84,6 @@ exports.saveUsuario = (req, res, next) =>
 			res.redirect('/admin/usuarios');
 		})
 		.catch((error) => {
-			// PASAR ERROR A VIEW
-			// PASAR ERROR A VIEW
-			// PASAR ERROR A VIEW
             next(new Error(error));
 			res.redirect('/admin/usuarios');
 		});
@@ -107,12 +102,13 @@ exports.deleteUsuario = async (req, res) => {
 		console.log('No documents matched the query. Deleted 0 documents.');
 	}
 
-	res.render('admin', {
-		title: 'Usuarios',
-		isAdmin: req.session.isAdmin,
-		table: 'usuarios',
-		data: users,
-	});
+	// res.render('admin', {
+	// 	title: 'Usuarios',
+	// 	isAdmin: req.session.isAdmin,
+	// 	table: 'usuarios',
+	// 	data: users,
+	// });
+    res.redirect('admin');
 };
 
 exports.adminFunciones = (req,res,next) =>

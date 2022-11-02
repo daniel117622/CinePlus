@@ -19,6 +19,8 @@ table.table-users.table.table-bordered.m-4(style="color:white")
             td #{val.admin}
             td.text-center
                 button.btn.btn-danger.m-0(name="btn-delete" data-delete=val._id) Delete
+                //- form(action="usuarios/delete/#{val._id}", method="POST")
+                //-    button.btn.btn-danger.m-0(type="submit") Delete
 button#btn-add-admin-user.btn.btn-secondary.ml-4 Add new user
 //- Appears when the button is clicked
 //- Nuevo usuario admin form

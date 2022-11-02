@@ -35,8 +35,11 @@ module.exports = class User {
 		return db.collection('users').findOne({ _id: ObjectID(Id) });
 	}
 
-	static deleteById(Id) {
+	static async deleteById(Id) {
 		const db = getDb();
-		return db.collection('users').deleteOne({ _id: ObjectID(Id) })
+		const algo = await db.collection('users').deleteOne({ _id: ObjectID(Id) });
+
+		return algo
+		
 	}
 };
