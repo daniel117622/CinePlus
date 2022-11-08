@@ -5,7 +5,7 @@ const User = require('../models/Users')
 const Cine = require('../models/Cines');
 
 const { getDb } = require('../database/database');
-const { isEmailValid } = require('../public/js/functions');
+const { isEmailValid, generarId } = require('../public/js/functions');
 const { getUsers } = require('../public/js/functions');
 
 
@@ -96,46 +96,58 @@ exports.deleteUsuario = async (req, res) => {
 	}
 	// const { users, error } = await getUsers();
 	User.deleteById(req.params.id)
-     .then(res => console.log(res))
-     .catch(err => console.log(err));
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
 
-	// if (result.deletedCount === 1) {
-	// 	console.log('Successfully deleted one document.');
-	// } else {
-	// 	console.log('No documents matched the query. Deleted 0 documents.');
-	// }
     res.redirect('/');
 };
 
 exports.adminFunciones = (req,res,next) =>
 {
-    console.log('Funciones');
+    // console.log('Funciones');
     res.render('admin',{title: "Funciones", isAdmin : req.session.isAdmin,table:"funciones"});
 }
 
 exports.adminCines = (req,res,next) =>
 {
-    console.log('Cines');
     res.render('admin',{title: "Cines", isAdmin : req.session.isAdmin,table:"cines"});
-    let newCine = new Cine("Cine 2", "Direcc 2", 30);
-    newCine.save();
-
 }
 
-exports.addNewCine = (req,res,next) => 
+exports.addNewCine = async(req,res,next) => // This is a POST
 {
-    if (!req.params) {
-        res.redirect('/');
+    if (!req.body) 
+    {
+        res.redirect('/admin/cines');
 	}
     
-    const _id = req.params.id
-    const _nombre = req.params.id
-    const _direccion = req.params.id
-    const _num_salas = req.params.id
-
-
-
-    res.redirect('/')    ;
+    const _nombre = req.body.nombre
+    const _direccion = req.body.ubicacion
+    const _num_salas = req.body.salas
+    let newCine = new Cine(_nombre, _direccion, _num_salas);
     
+    await newCine.generarId();
+    newCine.save();
+
+    res.redirect('/admin/cines');
+}
+
+exports.adminSalas = (req,res,next) =>
+{
+    Cine.getAllCines()
+        .then((arr) => {
+            // console.log(arr)
+            res.render('admin',{title: "Salas", isAdmin:req.session.isAdmin, table:"salas", cinesAll:arr});
+        })
+    
+}
+
+exports.adminSalasPost = (req,res,next) =>
+{
+    let cine_opc = req.body.cine_opc;
+
+    Cine.getAllCines()
+        .then((arr) => {
+            res.render('admin',{title: "Salas", isAdmin:req.session.isAdmin, table:"salas", cinesAll:arr, cine_opc:cine_opc});
+        })
 }
 

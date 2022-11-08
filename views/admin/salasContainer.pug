@@ -1,0 +1,40 @@
+
+h2(style="color:white") Salas
+
+if !cine_opc
+    <small>- Seleccionar cine</small>
+else
+    <h6>Cine seleccionado: #{cine_opc}</h6>
+
+<br />
+.container(style="text-align:center")
+
+form(action="" method="POST").form
+    .container(style="width:500px")
+        .row
+            .col
+                label(for="") ID Cine:
+            .col 
+                input(type="text", name="cine_opc").w-100
+        .row
+            .col
+                label(for="") Ubicación: 
+            .col
+                input(type="text", name="" disabled).w-100
+        if cine_opc
+            .row
+                .col
+                    label(for="") Número de salas: 
+                .col
+                    input(type="text", name="").w-100
+            .row
+                .col
+                    label(for="") Elegir sala: 
+                .col
+                    input(type="text", name="").w-100
+        .row
+            .col
+                button.btn.btn-block.btn-warning(type="submit") Submit
+
+for cine in cinesAll
+    h2 #{cine.nombre}

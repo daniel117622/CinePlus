@@ -29,6 +29,41 @@ const getUsers = async () => {
 	}
 };
 
+const getCines = async() => {
+	const db = getDb();
+	const cines = await fb.collection('cines').find().toArray();
+
+	if (cines.length < 0) {
+		return {
+			users: users,
+			error: 'No hay cines',
+		};
+	}
+		
+	return {
+		cines: cines,
+		error: null
+	}
+}
+
+const getMaxCine = async() => {
+	const db = getDb();
+	const cine = await db.collection('cines').find().sort({ _id: -1 }).limit(1).toArray();
+	const newId = cine[0]._id + 1;
+
+	if (!!cine === false) {
+		return {
+			cine: null,
+			error: 'No hay salas',
+		};
+	}
+		
+	return {
+		newId,
+		error: null
+	}
+}
+
 const isEmailValid = (email) => {
 	var emailRegex =
 		/^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
@@ -57,4 +92,6 @@ const isEmailValid = (email) => {
 
 exports.loadMovies = loadMovies;
 exports.getUsers = getUsers;
+exports.getCines = getCines;
+exports.getMaxSala = getMaxCine;
 exports.isEmailValid = isEmailValid;

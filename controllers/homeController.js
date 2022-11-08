@@ -13,7 +13,7 @@ exports.loadMainPage = async(req,res,next) =>
     var first_movie_bg_main = peliculas[0];
 
     // console.log({peliculas})
-    res.render('home', { 
+    res.render('home', {
         title: 'CinePlus', 
         message: 'Hello there!', 
         isLoggedIn: req.session.isLoggedIn,
