@@ -5,7 +5,7 @@ const User = require('../models/Users')
 const Cine = require('../models/Cines');
 
 const { getDb } = require('../database/database');
-const { isEmailValid, generarId } = require('../public/js/functions');
+const { isEmailValid } = require('../public/js/functions');
 const { getUsers } = require('../public/js/functions');
 
 
@@ -18,7 +18,10 @@ exports.adminDashboard = (req,res,next) =>
     ms.addShow(2,new Date('2056-12-12T16:00:00.000Z'),"Sala 1",[{num_asiento:"A1",ocupado:false,id_usuario:1}]);
     ms.save();
     */
-    res.render('admin',{title: "Dashboard", isAdmin : req.session.isAdmin});
+    // .row 
+    // .col 
+    //     div#like_button_container
+    res.render('admin',{title: "Dashboard", isAdmin:req.session.isAdmin, isLoggedIn:req.session.isLoggedIn});
 }
 exports.adminPushFunction = (req,res,next) =>
 {
@@ -43,14 +46,14 @@ exports.adminPushFunction = (req,res,next) =>
 exports.adminBoletos = (req,res,next) =>
 {
     console.log('Boletos');
-    res.render('admin',{title: "Boletos", isAdmin : req.session.isAdmin,table:"boletos"});
+    res.render('admin',{title: "Boletos", isAdmin:req.session.isAdmin, isLoggedIn:req.session.isLoggedIn, table:"boletos"});
 }
 exports.adminUsuarios = async(req,res,next) =>
 {
     // console.log('Loaded: Usuarios page');
     const { users, error} = await getUsers();
     
-    res.render('admin',{title: "Usuarios", isAdmin : req.session.isAdmin,table:"usuarios", data : users});
+    res.render('admin',{title: "Usuarios", isAdmin:req.session.isAdmin, isLoggedIn:req.session.isLoggedIn, table:"usuarios", data : users});
 }
 exports.saveUsuario = (req, res, next) => 
 {
@@ -105,12 +108,12 @@ exports.deleteUsuario = async (req, res) => {
 exports.adminFunciones = (req,res,next) =>
 {
     // console.log('Funciones');
-    res.render('admin',{title: "Funciones", isAdmin : req.session.isAdmin,table:"funciones"});
+    res.render('admin',{title: "Funciones", isAdmin:req.session.isAdmin, isLoggedIn:req.session.isLoggedIn, table:"funciones"});
 }
 
 exports.adminCines = (req,res,next) =>
 {
-    res.render('admin',{title: "Cines", isAdmin : req.session.isAdmin,table:"cines"});
+    res.render('admin',{title: "Cines", isAdmin:req.session.isAdmin, isLoggedIn:req.session.isLoggedIn, table:"cines"});
 }
 
 exports.addNewCine = async(req,res,next) => // This is a POST
@@ -136,7 +139,7 @@ exports.adminSalas = (req,res,next) =>
     Cine.getAllCines()
         .then((arr) => {
             // console.log(arr)
-            res.render('admin',{title: "Salas", isAdmin:req.session.isAdmin, table:"salas", cinesAll:arr});
+            res.render('admin',{title: "Salas", isAdmin:req.session.isAdmin, isLoggedIn:req.session.isLoggedIn, table:"salas", cinesAll:arr});
         })
     
 }

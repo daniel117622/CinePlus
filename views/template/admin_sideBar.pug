@@ -1,7 +1,7 @@
 extends layout.pug
 
 block content
-    if !isAdmin 
+    if !isAdmin && !isLoggedIn // Editar
         .container.mr-0.ml-0.justify-content-between.d-flex.flex-row.h-100 
             .container.mr-0.ml-0.w-25.border-right.h100(style="color:white")
                 p.h4.border-bottom Administrar
@@ -24,6 +24,6 @@ block content
             .h3(style="color:red") Forbidden
 
 block scripts 
-    if !isAdmin 
+    if !isAdmin && !isLoggedIn
         script(src="js/dashboard.js") 
         

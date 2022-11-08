@@ -23,7 +23,6 @@ html
         table.lead.w-25
             if !isLoggedIn
                 tr
-
                     td.text-center
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#99B65D" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -53,8 +52,6 @@ html
             li.nav-item.mt-3
         else 
             li.nav-item.mt-3(style="color:blue") Bienvenido, #{currentUser}
-        
-
 
         li.nav-item.mt-3
             form(action="/search" method="post")

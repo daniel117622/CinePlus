@@ -11,6 +11,7 @@ exports.loadMainPage = async(req,res,next) =>
     var peliculas = await loadMovies();
 
     var first_movie_bg_main = peliculas[0];
+    console.log(req.session.isLoggedIn)
 
     // console.log({peliculas})
     res.render('home', {
