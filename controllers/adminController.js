@@ -18,9 +18,6 @@ exports.adminDashboard = (req,res,next) =>
     ms.addShow(2,new Date('2056-12-12T16:00:00.000Z'),"Sala 1",[{num_asiento:"A1",ocupado:false,id_usuario:1}]);
     ms.save();
     */
-    // .row 
-    // .col 
-    //     div#like_button_container
     res.render('admin',{title: "Dashboard", isAdmin:req.session.isAdmin, isLoggedIn:req.session.isLoggedIn});
 }
 exports.adminPushFunction = (req,res,next) =>
